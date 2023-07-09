@@ -12,6 +12,10 @@ fn get_matches() -> ArgMatches {
         .get_matches()
 }
 
+fn save_bookmark(key: String, url: String) -> std::io::Result<()> {
+    todo!()
+}
+
 fn main() {
     todo!();
 }

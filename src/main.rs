@@ -38,8 +38,27 @@ fn init_dotfolder() -> io::Result<()> {
     ))
 }
 
-fn save_bookmark(key: String, url: String) -> std::io::Result<()> {
-    todo!()
+fn save_bookmark(key: String, url: String) -> io::Result<()> {
+    init_dotfolder()?;
+
+    if let Some(home_dir) = dirs::home_dir() {
+        let mut bookmarks_path = PathBuf::new();
+
+        bookmarks_path.push(home_dir);
+        bookmarks_path.push(".hmark");
+        bookmarks_path.push("bookmarks");
+
+        // Actual Writing
+        //
+        // fs::write(bookmarks_path, "...")?;
+
+        return Ok(())
+    }
+
+    Err(io::Error::new(
+        io::ErrorKind::Other,
+        "Home directory isn't defined",
+    ))
 }
 
 fn main() {

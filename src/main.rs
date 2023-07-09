@@ -2,8 +2,6 @@ extern crate dirs;
 
 use clap::{command, Arg, ArgMatches};
 use std::path::PathBuf;
-use std::fs::File;
-use std::io::prelude::*;
 
 fn get_matches() -> ArgMatches {
     let set_arg = Arg::new("set")

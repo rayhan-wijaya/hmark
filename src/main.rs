@@ -29,7 +29,7 @@ fn init_dotfolder() -> std::io::Result<()> {
 
     return Err(std::io::Error::new(
         std::io::ErrorKind::Other,
-        "Failed to initialize dotfolder as home directory isn't defined",
+        "Home directory isn't defined",
     ))
 }
 

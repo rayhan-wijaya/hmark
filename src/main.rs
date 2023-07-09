@@ -18,13 +18,20 @@ fn get_matches() -> ArgMatches {
 }
 
 fn init_dotfolder() -> std::io::Result<()> {
-    let dotfolder_path = Path::new("~/.hmark");
+    if let Some(home_dir) = dirs::home_dir() {
+        let mut dotfolder_path = PathBuf::new();
 
-    if dotfolder_path.exists() {
-        return Ok(());
+        dotfolder_path.push(home_dir);
+        dotfolder_path.push(".hmark");
+
+        return std::fs::create_dir_all(dotfolder_path)
     }
-
-    std::fs::create_dir_all(dotfolder_path)
+    else {
+        return Err(std::io::Error::new(
+            std::io::ErrorKind::Other,
+            "Failed to initialize dotfolder as home directory isn't defined",
+        ))
+    }
 }
 
 fn save_bookmark(key: String, url: String) -> std::io::Result<()> {

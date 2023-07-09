@@ -28,5 +28,5 @@ fn save_bookmark(key: String, url: String) -> std::io::Result<()> {
 }
 
 fn main() {
-    todo!();
+    todo!()
 }

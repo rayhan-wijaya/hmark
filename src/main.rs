@@ -1,5 +1,6 @@
 use std::path::Path;
 use std::io::prelude::*;
+use std::fs::File;
 use clap::{command, Arg, ArgMatches};
 
 fn get_matches() -> ArgMatches {

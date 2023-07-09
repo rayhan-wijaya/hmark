@@ -1,5 +1,5 @@
 [package]
-name = "smmark-cli"
+name = "hmark-cli"
 version = "0.1.0"
 edition = "2021"
 

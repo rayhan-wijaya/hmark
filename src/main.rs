@@ -26,12 +26,11 @@ fn init_dotfolder() -> std::io::Result<()> {
 
         return std::fs::create_dir_all(dotfolder_path)
     }
-    else {
-        return Err(std::io::Error::new(
-            std::io::ErrorKind::Other,
-            "Failed to initialize dotfolder as home directory isn't defined",
-        ))
-    }
+
+    return Err(std::io::Error::new(
+        std::io::ErrorKind::Other,
+        "Failed to initialize dotfolder as home directory isn't defined",
+    ))
 }
 
 fn save_bookmark(key: String, url: String) -> std::io::Result<()> {

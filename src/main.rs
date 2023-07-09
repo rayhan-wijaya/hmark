@@ -38,6 +38,10 @@ fn init_dotfolder() -> io::Result<()> {
     ))
 }
 
+fn is_bookmark_exist(key: String, reader: io::BufReader<fs::File>) -> bool {
+    todo!()
+}
+
 fn save_bookmark(key: String, url: String) -> io::Result<()> {
     init_dotfolder()?;
 

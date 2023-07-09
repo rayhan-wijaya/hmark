@@ -27,7 +27,7 @@ fn init_dotfolder() -> std::io::Result<()> {
         return std::fs::create_dir_all(dotfolder_path)
     }
 
-    return Err(std::io::Error::new(
+    Err(std::io::Error::new(
         std::io::ErrorKind::Other,
         "Home directory isn't defined",
     ))

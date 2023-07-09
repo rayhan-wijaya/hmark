@@ -2,7 +2,7 @@ hmark - for creating hashed bookmarks (still working on it)
 
   example usage:
 
-  hmark -s key=url
+  hmark set -k "bookmark_key" -u "https://..."
 
   bookmarks you create will be stored in the ~/.hmark/bookmarks file, where
   tilde, is of course, your home directory.

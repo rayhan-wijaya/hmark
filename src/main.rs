@@ -1,18 +1,24 @@
 extern crate dirs;
 
-use clap::{command, Arg, ArgMatches};
+use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
-fn get_matches() -> ArgMatches {
-    let set_arg = Arg::new("set")
-        .short('s')
-        .long("set")
-        .value_name("key=url")
-        .help("Sets a bookmark using a provided key, and url.");
+#[derive(Subcommand, Clone)]
+enum Commands {
+    Set {
+        #[arg(short, long)]
+        key: String,
 
-    command!()
-        .arg(set_arg)
-        .get_matches()
+        #[arg(short, long)]
+        url: String,
+    }
+}
+
+#[derive(Parser)]
+#[command(author, version, about, long_about = None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Option<Commands>,
 }
 
 fn init_dotfolder() -> std::io::Result<()> {

@@ -61,9 +61,21 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
         bookmarks_path.push(".hmark");
         bookmarks_path.push("bookmarks");
 
-        // Actual Writing
-        //
-        // fs::write(bookmarks_path, "...")?;
+        let bookmarks_file = if bookmarks_path.exists() {
+            fs::File::open(&bookmarks_path)?
+        } else {
+            fs::File::create(&bookmarks_path)?
+        };
+
+        let buf_reader = BufReader::new(bookmarks_file);
+
+        for line_result in buf_reader.lines() {
+            let line = line_result?;
+
+            if line.starts_with(&key) {
+                // Writing
+            };
+        };
 
         return Ok(())
     }

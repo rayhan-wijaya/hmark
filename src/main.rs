@@ -39,18 +39,6 @@ fn init_dotfolder() -> io::Result<()> {
     ))
 }
 
-fn is_bookmark_exist(key: String, reader: io::BufReader<fs::File>) -> Result<bool, io::Error> {
-    for line_result in reader.lines() {
-        let line = line_result?;
-
-        if line.starts_with(&key) {
-            return Ok(true);
-        }
-    }
-
-    return Ok(false);
-}
-
 fn save_bookmark(key: String, url: String) -> io::Result<()> {
     init_dotfolder()?;
 

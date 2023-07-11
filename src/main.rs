@@ -49,11 +49,11 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
         bookmarks_path.push(".hmark");
         bookmarks_path.push("bookmarks");
 
-        let bookmarks_file = if bookmarks_path.exists() {
-            fs::File::open(&bookmarks_path)?
-        } else {
-            fs::File::create(&bookmarks_path)?
-        };
+        let bookmarks_file = fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create(true)
+            .open(bookmarks_path)?;
 
         let buf_reader = BufReader::new(bookmarks_file);
 

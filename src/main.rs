@@ -2,7 +2,7 @@ extern crate dirs;
 
 use clap::{Parser, Subcommand};
 use std::{fs, io};
-use std::io::{BufRead, BufReader};
+use std::io::BufRead;
 use std::path::PathBuf;
 
 #[derive(Subcommand, Clone)]

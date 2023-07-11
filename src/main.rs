@@ -27,6 +27,7 @@ fn init_dotfolder() -> io::Result<()> {
 
         dotfolder_path.push(home_dir);
         dotfolder_path.push(".hmark");
+        dotfolder_path.push("bookmarks");
 
         return fs::create_dir_all(dotfolder_path)
     }

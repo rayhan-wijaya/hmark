@@ -60,6 +60,14 @@ fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     ))
 }
 
-fn main() {
-    todo!()
+// TODO: There should be better error handling in main(). Rather than it
+// returning io::Result.
+
+fn main() -> io::Result<()> {
+    let cli = Cli::parse();
+
+    match &cli.command {
+        Some(Commands::Set { key, url }) => save_bookmark(key, url),
+        None => Ok(()),
+    }
 }

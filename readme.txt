@@ -4,5 +4,5 @@ hmark - for creating hashed bookmarks (still working on it)
 
   hmark set -k "bookmark_key" -u "https://..."
 
-  bookmarks you create will be stored in the ~/.hmark/bookmark folder, where
+  bookmarks you create will be stored in the ~/.hmark/bookmarks folder, where
   tilde, is of course, your home directory.

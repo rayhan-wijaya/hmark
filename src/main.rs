@@ -64,6 +64,28 @@ fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     ))
 }
 
+fn get_bookmark(key: &str) -> io::Result<String> {
+    init_dotfolder()?;
+
+    if let Some(home_dir) = dirs::home_dir() {
+        let mut bookmark_path = path::PathBuf::new();
+
+        bookmark_path.push(home_dir);
+        bookmark_path.push(".hmark");
+        bookmark_path.push("bookmarks");
+        bookmark_path.push(key);
+
+        let bookmark_url = fs::read_to_string(&bookmark_path)?;
+
+        return Ok(bookmark_url);
+    }
+
+    Err(io::Error::new(
+        io::ErrorKind::Other,
+        "Home directory isn't defined",
+    ))
+}
+
 // TODO: There should be better error handling in main(). Rather than it
 // returning io::Result.
 

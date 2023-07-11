@@ -2,7 +2,6 @@ extern crate dirs;
 
 use clap::{Parser, Subcommand};
 use std::{fs, io, path};
-use std::io::BufRead;
 
 #[derive(Subcommand, Clone)]
 enum Commands {

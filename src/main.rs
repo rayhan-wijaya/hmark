@@ -1,9 +1,8 @@
 extern crate dirs;
 
 use clap::{Parser, Subcommand};
-use std::{fs, io};
+use std::{fs, io, path};
 use std::io::BufRead;
-use std::path::PathBuf;
 
 #[derive(Subcommand, Clone)]
 enum Commands {
@@ -25,7 +24,7 @@ struct Cli {
 
 fn init_dotfolder() -> io::Result<()> {
     if let Some(home_dir) = dirs::home_dir() {
-        let mut dotfolder_path = PathBuf::new();
+        let mut dotfolder_path = path::PathBuf::new();
 
         dotfolder_path.push(home_dir);
         dotfolder_path.push(".hmark");
@@ -43,7 +42,7 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
     init_dotfolder()?;
 
     if let Some(home_dir) = dirs::home_dir() {
-        let mut bookmark_path = PathBuf::new();
+        let mut bookmark_path = path::PathBuf::new();
 
         bookmark_path.push(home_dir);
         bookmark_path.push(".hmark");

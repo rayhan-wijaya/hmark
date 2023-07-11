@@ -63,17 +63,10 @@ fn init_dotfolder() -> io::Result<()> {
 fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     init_dotfolder()?;
 
-    if let Some(home_dir) = dirs::home_dir() {
-        let bookmark_path = get_bookmark_path(Some(key))?;
-        fs::write(&bookmark_path, url);
+    let bookmark_path = get_bookmark_path(Some(key))?;
+    fs::write(&bookmark_path, url);
 
-        return Ok(())
-    }
-
-    Err(io::Error::new(
-        io::ErrorKind::Other,
-        "Home directory isn't defined",
-    ))
+    Ok(())
 }
 
 fn get_bookmark(key: &str) -> io::Result<String> {

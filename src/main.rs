@@ -12,7 +12,6 @@ enum ListType {
 #[derive(Subcommand, Clone)]
 enum Commands {
     View {
-        #[arg(short, long)]
         key: String,
     },
     Set {

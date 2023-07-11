@@ -57,8 +57,6 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
             .truncate(true)
             .open(bookmark_path)?;
 
-        let buf_reader = BufReader::new(bookmark_file);
-
         return Ok(())
     }
 

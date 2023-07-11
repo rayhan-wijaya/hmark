@@ -57,14 +57,16 @@ fn get_bookmark_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
 
 fn init_dotfolder() -> io::Result<()> {
     let dotfolder_path = get_bookmark_path(None)?;
-    fs::create_dir_all(dotfolder_path)
+    fs::create_dir_all(dotfolder_path)?;
+
+    Ok(())
 }
 
 fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     init_dotfolder()?;
 
     let bookmark_path = get_bookmark_path(Some(key))?;
-    fs::write(&bookmark_path, url);
+    fs::write(&bookmark_path, url)?;
 
     Ok(())
 }

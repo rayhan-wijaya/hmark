@@ -23,7 +23,7 @@ enum Commands {
         value: String,
     },
     List {
-        #[arg(short, long, value_enum)]
+        #[arg(short, long, value_enum, default_value_t = ListType::Key)]
         list: ListType,
     },
 }

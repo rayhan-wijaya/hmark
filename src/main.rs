@@ -84,6 +84,27 @@ fn get_bookmark(key: &str) -> io::Result<String> {
     Ok(bookmark_url)
 }
 
+fn get_all_bookmarks(list_type: &ListType) -> io::Result<Vec<Option<String>>> {
+    init_bookmarks_dir()?;
+
+    let mut bookmarks = Vec::new();
+
+    let bookmarks_path = get_bookmark_path(None)?;
+    let bookmark_files = fs::read_dir(bookmarks_path)?;
+
+    for bookmark_file_result in bookmark_files.into_iter() {
+        let bookmark_file = bookmark_file_result?;
+        let bookmark = match list_type {
+            ListType::Key => bookmark_file.file_name().into_string().ok(),
+            ListType::Url => fs::read_to_string(bookmark_file.path()).ok(),
+        };
+
+        bookmarks.push(bookmark);
+    }
+
+    Ok(bookmarks)
+}
+
 // TODO: There should be better error handling in main(). Rather than it
 // returning io::Result.
 

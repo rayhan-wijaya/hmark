@@ -80,13 +80,7 @@ fn get_bookmark(key: &str) -> io::Result<String> {
     init_dotfolder()?;
 
     if let Some(home_dir) = dirs::home_dir() {
-        let mut bookmark_path = path::PathBuf::new();
-
-        bookmark_path.push(home_dir);
-        bookmark_path.push(".hmark");
-        bookmark_path.push("bookmarks");
-        bookmark_path.push(key);
-
+        let bookmark_path = get_bookmark_path(Some(key))?;
         let bookmark_url = fs::read_to_string(&bookmark_path)?;
 
         return Ok(bookmark_url);

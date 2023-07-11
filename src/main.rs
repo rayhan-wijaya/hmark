@@ -1,7 +1,13 @@
 extern crate dirs;
 
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, ValueEnum};
 use std::{fs, io, path};
+
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
+enum ListType {
+    Key,
+    Url,
+}
 
 #[derive(Subcommand, Clone)]
 enum Commands {

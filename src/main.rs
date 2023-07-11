@@ -31,7 +31,7 @@ struct Cli {
     command: Option<Commands>,
 }
 
-fn get_bookmarks_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
+fn get_bookmark_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
     match dirs::home_dir() {
         Some(home_dir) => {
             let mut bookmarks_path = path::PathBuf::new();
@@ -56,7 +56,7 @@ fn get_bookmarks_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
 }
 
 fn init_bookmarks_dir() -> io::Result<()> {
-    let bookmarks_path = get_bookmarks_path(None)?;
+    let bookmarks_path = get_bookmark_path(None)?;
     fs::create_dir_all(bookmarks_path)?;
 
     Ok(())
@@ -65,8 +65,8 @@ fn init_bookmarks_dir() -> io::Result<()> {
 fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     init_bookmarks_dir()?;
 
-    let bookmarks_path = get_bookmarks_path(Some(key))?;
-    fs::write(&bookmarks_path, url)?;
+    let bookmark_path = get_bookmark_path(Some(key))?;
+    fs::write(&bookmark_path, url)?;
 
     Ok(())
 }
@@ -74,8 +74,8 @@ fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
 fn get_bookmark(key: &str) -> io::Result<String> {
     init_bookmarks_dir()?;
 
-    let bookmarks_path = get_bookmarks_path(Some(key))?;
-    let bookmark_url = fs::read_to_string(&bookmarks_path)?;
+    let bookmark_path = get_bookmark_path(Some(key))?;
+    let bookmark_url = fs::read_to_string(&bookmark_path)?;
 
     Ok(bookmark_url)
 }

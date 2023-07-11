@@ -117,6 +117,18 @@ fn main() -> io::Result<()> {
             println!("{}", get_bookmark(key)?);
             Ok(())
         },
+        Some(Commands::List { list }) => {
+            get_all_bookmarks(list)?.into_iter().for_each(|bookmark_option| {
+                let bookmark = match bookmark_option {
+                    Some(bookmark) => bookmark,
+                    None => String::from("(?)"),
+                };
+
+                println!("{}", bookmark);
+            });
+
+            Ok(())
+        },
         None => Ok(()),
     }
 }

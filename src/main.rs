@@ -5,13 +5,17 @@ use std::{fs, io, path};
 
 #[derive(Subcommand, Clone)]
 enum Commands {
+    View {
+        #[arg(short, long)]
+        key: String,
+    },
     Set {
         #[arg(short, long)]
         key: String,
 
         #[arg(short, long)]
         url: String,
-    }
+    },
 }
 
 #[derive(Parser)]

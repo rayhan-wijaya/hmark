@@ -56,20 +56,8 @@ fn get_bookmark_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
 }
 
 fn init_dotfolder() -> io::Result<()> {
-    if let Some(home_dir) = dirs::home_dir() {
-        let mut dotfolder_path = path::PathBuf::new();
-
-        dotfolder_path.push(home_dir);
-        dotfolder_path.push(".hmark");
-        dotfolder_path.push("bookmarks");
-
-        return fs::create_dir_all(dotfolder_path)
-    }
-
-    Err(io::Error::new(
-        io::ErrorKind::Other,
-        "Home directory isn't defined",
-    ))
+    let dotfolder_path = get_bookmark_path(None)?;
+    fs::create_dir_all(dotfolder_path)
 }
 
 fn save_bookmark(key: &str, url: &str) -> io::Result<()> {

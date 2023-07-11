@@ -94,6 +94,10 @@ fn main() -> io::Result<()> {
 
     match &cli.command {
         Some(Commands::Set { key, url }) => save_bookmark(key, url),
+        Some(Commands::View { key }) => {
+            println!("{}", get_bookmark(key)?);
+            Ok(())
+        },
         None => Ok(()),
     }
 }

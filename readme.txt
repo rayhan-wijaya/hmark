@@ -1,13 +1,13 @@
 hmark - for creating hashed bookmarks (still working on it)
 
-  example usage:
+  ex. usage:
 
     hmark set -k "bookmark_key" -u "https://..."
 
     bookmarks you create will be stored in the ~/.hmark/bookmarks folder, where
     tilde, is of course, your home directory.
 
-  example bookmarks folder:
+  ex. bookmarks folder:
 
     * ~/.hmark/bookmarks/
     |  ffmpeg_docs  -> "https://ffmpeg.org/ffmpeg.html/"

@@ -31,20 +31,20 @@ struct Cli {
     command: Option<Commands>,
 }
 
-fn get_bookmark_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
+fn get_bookmarks_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
     match dirs::home_dir() {
         Some(home_dir) => {
-            let mut bookmark_path = path::PathBuf::new();
+            let mut bookmarks_path = path::PathBuf::new();
 
-            bookmark_path.push(home_dir);
-            bookmark_path.push(".hmark");
-            bookmark_path.push("bookmarks");
+            bookmarks_path.push(home_dir);
+            bookmarks_path.push(".hmark");
+            bookmarks_path.push("bookmarks");
 
             if let Some(bookmark_key) = bookmark_key {
-                bookmark_path.push(bookmark_key);
+                bookmarks_path.push(bookmark_key);
             }
 
-            Ok(bookmark_path)
+            Ok(bookmarks_path)
         },
         None => {
             Err(io::Error::new(
@@ -56,8 +56,8 @@ fn get_bookmark_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
 }
 
 fn init_bookmarks_dir() -> io::Result<()> {
-    let bookmark_path = get_bookmark_path(None)?;
-    fs::create_dir_all(bookmark_path)?;
+    let bookmarks_path = get_bookmarks_path(None)?;
+    fs::create_dir_all(bookmarks_path)?;
 
     Ok(())
 }
@@ -65,8 +65,8 @@ fn init_bookmarks_dir() -> io::Result<()> {
 fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     init_bookmarks_dir()?;
 
-    let bookmark_path = get_bookmark_path(Some(key))?;
-    fs::write(&bookmark_path, url)?;
+    let bookmarks_path = get_bookmarks_path(Some(key))?;
+    fs::write(&bookmarks_path, url)?;
 
     Ok(())
 }
@@ -74,8 +74,8 @@ fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
 fn get_bookmark(key: &str) -> io::Result<String> {
     init_bookmarks_dir()?;
 
-    let bookmark_path = get_bookmark_path(Some(key))?;
-    let bookmark_url = fs::read_to_string(&bookmark_path)?;
+    let bookmarks_path = get_bookmarks_path(Some(key))?;
+    let bookmark_url = fs::read_to_string(&bookmarks_path)?;
 
     Ok(bookmark_url)
 }

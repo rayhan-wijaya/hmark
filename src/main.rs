@@ -31,6 +31,30 @@ struct Cli {
     command: Option<Commands>,
 }
 
+fn get_bookmark_path(bookmark_key: Option<&str>) -> io::Result<path::PathBuf> {
+    match dirs::home_dir() {
+        Some(home_dir) => {
+            let mut bookmark_path = path::PathBuf::new();
+
+            bookmark_path.push(home_dir);
+            bookmark_path.push(".hmark");
+            bookmark_path.push("bookmarks");
+
+            if let Some(bookmark_key) = bookmark_key {
+                bookmark_path.push(bookmark_key);
+            }
+
+            Ok(bookmark_path)
+        },
+        None => {
+            Err(io::Error::new(
+                io::ErrorKind::Other,
+                "Home directory isn't defined",
+            ))
+        },
+    }
+}
+
 fn init_dotfolder() -> io::Result<()> {
     if let Some(home_dir) = dirs::home_dir() {
         let mut dotfolder_path = path::PathBuf::new();

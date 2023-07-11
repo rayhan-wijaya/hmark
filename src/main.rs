@@ -64,14 +64,8 @@ fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     init_dotfolder()?;
 
     if let Some(home_dir) = dirs::home_dir() {
-        let mut bookmark_path = path::PathBuf::new();
-
-        bookmark_path.push(home_dir);
-        bookmark_path.push(".hmark");
-        bookmark_path.push("bookmarks");
-        bookmark_path.push(key);
-
-        fs::write(&bookmark_path, url)?;
+        let bookmark_path = get_bookmark_path(Some(key))?;
+        fs::write(&bookmark_path, url);
 
         return Ok(())
     }

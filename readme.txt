@@ -9,7 +9,7 @@ hmark - for creating hashed bookmarks (still working on it)
 
   example bookmarks folder:
 
-    * bookmarks/
+    * ~/.hmark/bookmarks/
     |  ffmpeg_docs  -> "https://ffmpeg.org/ffmpeg.html/"
     |  diesel_docs  -> "https://docs.rs/diesel/latest/diesel/"
     |  a_cool_tweet -> "https://twitter.com/Neovim/status/1671419524854210560/"

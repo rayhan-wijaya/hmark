@@ -43,27 +43,21 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
     init_dotfolder()?;
 
     if let Some(home_dir) = dirs::home_dir() {
-        let mut bookmarks_path = PathBuf::new();
+        let mut bookmark_path = PathBuf::new();
 
-        bookmarks_path.push(home_dir);
-        bookmarks_path.push(".hmark");
-        bookmarks_path.push("bookmarks");
+        bookmark_path.push(home_dir);
+        bookmark_path.push(".hmark");
+        bookmark_path.push("bookmarks");
+        bookmark_path.push(&key);
 
-        let bookmarks_file = fs::OpenOptions::new()
+        let bookmark_file = fs::OpenOptions::new()
             .read(true)
             .write(true)
             .create(true)
-            .open(bookmarks_path)?;
+            .truncate(true)
+            .open(bookmark_path)?;
 
-        let buf_reader = BufReader::new(bookmarks_file);
-
-        for line_result in buf_reader.lines() {
-            let line = line_result?;
-
-            if line.starts_with(&key) {
-                // Writing
-            };
-        };
+        let buf_reader = BufReader::new(bookmark_file);
 
         return Ok(())
     }

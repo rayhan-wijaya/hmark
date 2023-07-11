@@ -6,7 +6,7 @@ use std::{fs, io, path};
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
 enum ListType {
     Key,
-    Url,
+    Value,
 }
 
 #[derive(Subcommand, Clone)]
@@ -20,7 +20,7 @@ enum Commands {
         key: String,
 
         #[arg(short, long)]
-        url: String,
+        value: String,
     },
     List {
         #[arg(short, long, value_enum)]
@@ -66,11 +66,11 @@ fn init_bookmarks_dir() -> io::Result<()> {
     Ok(())
 }
 
-fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
+fn save_bookmark(key: &str, value: &str) -> io::Result<()> {
     init_bookmarks_dir()?;
 
     let bookmark_path = get_bookmark_path(Some(key))?;
-    fs::write(&bookmark_path, url)?;
+    fs::write(&bookmark_path, value)?;
 
     Ok(())
 }
@@ -79,9 +79,9 @@ fn get_bookmark(key: &str) -> io::Result<String> {
     init_bookmarks_dir()?;
 
     let bookmark_path = get_bookmark_path(Some(key))?;
-    let bookmark_url = fs::read_to_string(&bookmark_path)?;
+    let bookmark_value = fs::read_to_string(&bookmark_path)?;
 
-    Ok(bookmark_url)
+    Ok(bookmark_value)
 }
 
 fn get_all_bookmarks(list_type: &ListType) -> io::Result<Vec<Option<String>>> {
@@ -96,7 +96,7 @@ fn get_all_bookmarks(list_type: &ListType) -> io::Result<Vec<Option<String>>> {
         let bookmark_file = bookmark_file_result?;
         let bookmark = match list_type {
             ListType::Key => bookmark_file.file_name().into_string().ok(),
-            ListType::Url => fs::read_to_string(bookmark_file.path()).ok(),
+            ListType::Value => fs::read_to_string(bookmark_file.path()).ok(),
         };
 
         bookmarks.push(bookmark);
@@ -112,7 +112,7 @@ fn main() -> io::Result<()> {
     let cli = Cli::parse();
 
     match &cli.command {
-        Some(Commands::Set { key, url }) => save_bookmark(key, url),
+        Some(Commands::Set { key, value }) => save_bookmark(key, value),
         Some(Commands::View { key }) => {
             println!("{}", get_bookmark(key)?);
             Ok(())

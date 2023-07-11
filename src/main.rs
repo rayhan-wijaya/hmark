@@ -37,7 +37,7 @@ fn init_dotfolder() -> io::Result<()> {
     ))
 }
 
-fn save_bookmark(key: String, url: String) -> io::Result<()> {
+fn save_bookmark(key: &str, url: &str) -> io::Result<()> {
     init_dotfolder()?;
 
     if let Some(home_dir) = dirs::home_dir() {
@@ -46,7 +46,7 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
         bookmark_path.push(home_dir);
         bookmark_path.push(".hmark");
         bookmark_path.push("bookmarks");
-        bookmark_path.push(&key);
+        bookmark_path.push(key);
 
         fs::write(&bookmark_path, url)?;
 

@@ -112,7 +112,10 @@ fn main() -> io::Result<()> {
     let cli = Cli::parse();
 
     match &cli.command {
-        Some(Commands::Set { key, value }) => save_bookmark(key, value),
+        Some(Commands::Set { key, value }) => {
+            save_bookmark(key, value)?;
+            Ok(())
+        },
         Some(Commands::View { key }) => {
             println!("{}", get_bookmark(key)?);
             Ok(())

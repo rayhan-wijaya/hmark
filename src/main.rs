@@ -50,11 +50,7 @@ fn save_bookmark(key: String, url: String) -> io::Result<()> {
         bookmark_path.push("bookmarks");
         bookmark_path.push(&key);
 
-        let bookmark_file = fs::OpenOptions::new()
-            .write(true)
-            .create(true)
-            .truncate(true)
-            .open(bookmark_path)?;
+        fs::write(&bookmark_path, url)?;
 
         return Ok(())
     }

@@ -22,6 +22,10 @@ enum Commands {
         #[arg(short, long)]
         url: String,
     },
+    List {
+        #[arg(short, long, value_enum)]
+        list: ListType,
+    },
 }
 
 #[derive(Parser)]

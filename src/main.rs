@@ -154,6 +154,10 @@ fn main() -> io::Result<()> {
 
             Ok(())
         },
+        Some(Commands::Rm { keys }) => {
+            remove_bookmarks(keys)?;
+            Ok(())
+        },
         None => Ok(()),
     }
 }

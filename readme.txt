@@ -8,6 +8,10 @@ hmark - for creating hashed bookmarks (still working on it)
     $ hmark view gitlab_home
     https://gitlab.com
 
+    $ hmark list
+    hmark
+    gitlab_home
+
     bookmarks you create will be stored in the ~/.hmark/bookmarks folder, where
     tilde, is of course, your home directory.
 

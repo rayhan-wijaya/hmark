@@ -8,6 +8,9 @@ hmark - for creating hashed bookmarks (still working on it)
     $ hmark view gitlab_home
     https://gitlab.com
 
+    $ hmark view -w gitlab_home
+    (browser session)
+
     $ hmark list
     hmark
     gitlab_home

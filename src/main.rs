@@ -141,9 +141,19 @@ fn main() -> io::Result<()> {
             save_bookmark(key, value)?;
             Ok(())
         },
-        Some(Commands::View { key }) => {
-            println!("{}", get_bookmark(key)?);
-            Ok(())
+        Some(Commands::View { key, web }) => {
+            match web {
+                true => {
+                    let bookmark_value = get_bookmark(key)?;
+                    open::that(bookmark_value)?;
+
+                    Ok(())
+                },
+                false => {
+                    println!("{}", get_bookmark(key)?);
+                    Ok(())
+                }
+            }
         },
         Some(Commands::List { list }) => {
             get_all_bookmarks(list)?.into_iter().for_each(|bookmark_option| {

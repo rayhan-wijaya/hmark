@@ -13,6 +13,9 @@ enum ListType {
 enum Commands {
     View {
         key: String,
+
+        #[arg(short, long)]
+        web: bool,
     },
     Set {
         #[arg(short, long)]

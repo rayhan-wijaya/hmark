@@ -107,6 +107,26 @@ fn get_all_bookmarks(list_type: &ListType) -> io::Result<Vec<Option<String>>> {
     Ok(bookmarks)
 }
 
+fn remove_bookmarks(bookmarks: &Vec<String>) -> io::Result<()> {
+    init_bookmarks_dir()?;
+
+    let bookmarks_path = get_bookmark_path(None)?;
+    let bookmark_files = fs::read_dir(bookmarks_path)?;
+
+    for bookmark_file_result in bookmark_files.into_iter() {
+        let bookmark_file = bookmark_file_result?;
+        let bookmark_key_option = bookmark_file.file_name().into_string().ok();
+
+        if let Some(bookmark_key) = bookmark_key_option {
+            if bookmarks.contains(&bookmark_key) {
+                fs::remove_file(bookmark_file.path())?;
+            }
+        }
+    }
+
+    Ok(())
+}
+
 // TODO: There should be better error handling in main(). Rather than it
 // returning io::Result.
 

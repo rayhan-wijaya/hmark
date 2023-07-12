@@ -21,6 +21,9 @@ enum Commands {
         #[arg(short, long)]
         value: String,
     },
+    Rm {
+        keys: Vec<String>,
+    },
     List {
         #[arg(short, long, value_enum, default_value_t = ListType::Key)]
         list: ListType,

@@ -2,8 +2,8 @@ hmark - for creating hashed bookmarks (still working on it)
 
   ex. usage:
 
-    $ hmark set -k gitlab_page -u https://gitlab.com
-    $ hmark view gitlab_page
+    $ hmark set -k gitlab_home -u https://gitlab.com
+    $ hmark view gitlab_home
     https://gitlab.com
 
     bookmarks you create will be stored in the ~/.hmark/bookmarks folder, where

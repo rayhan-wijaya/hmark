@@ -3,6 +3,8 @@ hmark - for creating hashed bookmarks (still working on it)
   ex. usage:
 
     $ hmark set -k gitlab_home -u https://gitlab.com
+    $ hmark set -k hmark       -u https://github.com/rayhan-wijaya/hmark
+
     $ hmark view gitlab_home
     https://gitlab.com
 

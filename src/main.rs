@@ -154,12 +154,10 @@ fn main() -> io::Result<()> {
         },
         Some(Commands::List { list }) => {
             get_all_bookmarks(list)?.into_iter().for_each(|bookmark_option| {
-                let bookmark = match bookmark_option {
+                println!("{}", match bookmark_option {
                     Some(bookmark) => bookmark,
                     None => String::from("(?)"),
-                };
-
-                println!("{}", bookmark);
+                });
             });
 
             Ok(())

@@ -18,10 +18,7 @@ enum Commands {
         web: bool,
     },
     Set {
-        #[arg(short, long)]
         key: String,
-
-        #[arg(short, long)]
         value: String,
     },
     Rm {
